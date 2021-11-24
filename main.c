@@ -4,30 +4,49 @@
 #include <ctype.h>
 #include <string.h>
 
+/*
+// Fråga 
+*/
+
+
 #define SENTINEL -1
 #define CAPACITY 20
 
 typedef int intArray[CAPACITY];
 
+enum SortOrder {ASCENDING, DESCENDING};
+enum Uniqueness {UNIQUE, NONUNIQUE};
+
 void printArray(intArray a);
 int getIntArraySize(intArray a);
 int getIntArray(intArray a);
+void appendIntArray(intArray a, intArray b, intArray c);
+void interleaveIntArray(intArray a, intArray b, intArray c);
+void sortIntArray(intArray a);
+void setSortOrder(enum SortOrder sortOrder);
+void setUniqueness(enum Uniqueness uniqueness);
+void bubbleSort(int * const a, const size_t size);
+void swap(int *element1Ptr, int *element2Ptr);
 
 int main() {
     // intArray a = {SENTINEL};
     intArray a = {2,6,8,4,5,SENTINEL};
+    intArray b = {3,4,6,7,9,SENTINEL};
+    intArray c;
 
     printArray(a); 
     printf("%d\n", getIntArraySize(a));
 
 
     intArray arr = {0};
-    bool b;
+    bool y;
 
-    b = getIntArray(arr);
-    printf("%s", b == 1 ? "True" : "False");
+    y = getIntArray(arr);
+    printf("%s\n", y == 1 ? "True" : "False");
 
-    
+    appendIntArray(a,b,c);
+    interleaveIntArray(a,b,c);
+    // printIntArray(c);
     return 0;
 }
 
@@ -51,44 +70,168 @@ int getIntArray(intArray a) {
 
     char input[CAPACITY];
     printf("Please enter a comma-separated list of positive integers: ");
-    scanf("%[^\n]", &input);
+    fgets(input, CAPACITY, stdin);
 
-    int strLength = strlen(input);
-    printf("%d", strlen(input));
+    int strLength = strlen(input)-1;
+    printf("%d\n", strLength);
+
+    char *tokenPtr = strtok(input, ",");
+    for(int i=0;tokenPtr != NULL; i++)
+    {   
+        if (input[i] < 0) return false;
+        printf("%s ", tokenPtr);
+        tokenPtr = strtok(NULL, ",");
+        // a[i] = tokenPtr;
+    }
 
     if (!isdigit(input[0])) {
         puts("[]");
         return false;
     }
-    if (!isdigit(input[strlen(input)-1])) {
+    if (!isdigit(input[strLength -1])) {
         puts("[]");
         return false;
     }
+    // Fråga
+    // char arr[CAPACITY];
+    // for (int i = 0; i < strLength; i++) {
+    //     if (!isspace(input[i])) {
+    //         arr[i] = input[i];
+    //     }
+    // // }
+    // for (int i = 0; i < strLength; i++) {
 
-    char arr[CAPACITY];
-    // char arr[strlen(input)];
-    for (int i = 0; i < strlen(input); i++) {
-        if (!isblank(input[i])) {
-            arr[i] = input[i];
-        }        
-    }
-    
+    //     if (!isdigit(input[i]) && i <= strLength) {
+    //         // if (isblank(input[i+1])){
+    //         //     i++;
+    //         // }
+    //         if (!isdigit(input[i+1])) {
+    //             puts("[]");
+    //             return false;
+    //         }
 
-    for (int i = 0; i < strlen(arr); i++) {
-        if (!isdigit(arr[i]) && i <= strlen(arr)) {
-            // if (isblank(arr[i+1])){
-            //     i++;
-            // }
-            if (!isdigit(arr[i+1])) {
-                printf("[]");
-                return false;
-            }
-            
+    //         // else if (isdigit(input[i+1])) {
+    //         //     puts("[]");
+    //         //     return false;
+    //         // }
+    //     }
+        // else { 
+        //     a[i] = input[i];        
+        // }
+    // }
+    a[strLength] = SENTINEL;
+    // Fråga
+    printArray(a);
+    return true; 
+}
+void appendIntArray(intArray a, intArray b, intArray c) {
+    int h;
+    for (int i = 0, j = 0; a[i] != SENTINEL || b[j] != SENTINEL;) {
+        if (a[i] != SENTINEL) {
+            c[i] = a[i];
+            i++;
         }
-        if (arr[i] < 0) return false;
-
+        else if (b[j] != SENTINEL) {
+            c[i+j] = b[j];
+            j++;
+        }
+        h = i+j;
     }
-    printf("[ %d ]", input);
+    // Fråga
+    // int arrLength = strlen (a)-1 + strlen (b)-1;
+    // for (int i = 0; i < arrLength; i++) {
+    //     if (a[i] != SENTINEL)
+    //     {
+    //         c[i] = a[i];
+    //     }
+    //     else if (i <= strlen (b))
+    //     {
+    //         c[i] = b[i];
+    //     }
+    // }
+    c[h] = SENTINEL;
+    printArray(c);
+    // printf("/n%d", c);
+}
 
-    return true;
+void interleaveIntArray(intArray a, intArray b, intArray c) {
+    printArray(a);
+    printArray(b);
+    int h = 0;
+    for (int i = 0, j = 0; a[i] != SENTINEL || b[j] != SENTINEL;) {
+        if (a[i] != SENTINEL) {
+            c[h] = a[i];
+            i++;
+            h++;
+        }
+        if (b[j] != SENTINEL) {
+            c[h] = b[j];
+            j++;
+            h++;
+        }
+    }
+    c[h] = SENTINEL;
+    printArray(c);
+}
+void sortIntArray(intArray a) {
+    int order;
+    if (order == 0) {
+    bubbleSort(a, CAPACITY);
+    puts("\nData items in descending order");
+    }
+    else { // pass function descending
+    bubbleSort(a, CAPACITY);
+    }
+    puts("\nData items in ascending order");
+
+}
+
+void setSortOrder(enum SortOrder sortOrder) {
+    // static variables, värdena ska komma från 2 olika enumtypes
+    // Fråga static varable?
+    // sort ascending och descending
+
+    // char ascOrdes[1];
+    // printf("Do you want to sort the list in ascending or descending order? a/d");
+    // scanf("%c", &ascOrdes);
+
+    printf("%s", "Enter 1 to sort in ascending order,\n"
+    "Enter 2 to sort in descending order: ");
+    int order; // 1 for ascending order or 2 for descending order
+    scanf("%d", &order);
+
+    
+    // if (ascOrdes == a) {
+    //     // sort in ascenind order
+    // }
+    // else { //sort in descending order
+    // }    
+    // setUniqueness();
+}
+void setUniqueness(enum Uniqueness uniqueness) {
+
+}
+
+void bubbleSort(int * const a, const size_t size) {
+
+    // loop to control passes
+    for (unsigned int pass = 0; pass < size - 1; ++pass) {
+
+        // loop to control comparisons during each pass
+        for (size_t j = 0; j < size - 1; ++j) {
+
+            // swap adjacent elements if they’re out of order
+            if (a[j] > a[j + 1]) {
+                swap(&a[j], &a[j + 1]);
+            }
+            // if (a[j] > a[j + 1]) {
+            //     swap(&a[j], &a[j + 1]);
+        }   
+    }
+} 
+
+void swap(int *element1Ptr, int *element2Ptr) {
+    int hold = *element1Ptr;
+    *element1Ptr = *element2Ptr;
+    *element2Ptr = hold;
 }
