@@ -60,7 +60,7 @@ int getIntArray(intArray a) {
         puts("[]");
         return false;
     }
-
+    printf("Shut up!");
     if (!isdigit(input[strlen(input)-1])) {
         puts("[]");
         return false;
