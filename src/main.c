@@ -99,26 +99,26 @@ int getIntArray(intArray a) {
     //         arr[i] = input[i];
     //     }
     // // }
-    // for (int i = 0; i < strLength; i++) {
+    for (int i = 0; i < strLength; i++) {
 
-    //     if (!isdigit(input[i]) && i <= strLength) {
-    //         // if (isblank(input[i+1])){
-    //         //     i++;
-    //         // }
-    //         if (!isdigit(input[i+1])) {
-    //             puts("[]");
-    //             return false;
-    //         }
+        if (!isdigit(input[i]) && i <= strLength) {
+            // if (isblank(input[i+1])){
+            //     i++;
+            // }
+            if (!isdigit(input[i+1])) {
+                puts("[]");
+                return false;
+            }
 
-    //         // else if (isdigit(input[i+1])) {
-    //         //     puts("[]");
-    //         //     return false;
-    //         // }
-    //     }
-        // else { 
-        //     a[i] = input[i];        
-        // }
-    // }
+            // else if (isdigit(input[i+1])) {
+            //     puts("[]");
+            //     return false;
+            // }
+        }
+        else { 
+            a[i] = input[i];        
+        }
+    }
     a[strLength] = SENTINEL;
     // Fråga
     printArray(a);
