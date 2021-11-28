@@ -98,7 +98,6 @@ int getIntArray(intArray a) {
             pointingIndex++;
         }
     }
-    // --------------
     a[strLength] = SENTINEL;
     printArray(a);
     return true; 
