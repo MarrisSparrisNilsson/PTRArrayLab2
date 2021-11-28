@@ -53,9 +53,9 @@ int main() {
 void printArray(intArray a) {
     printf("[");
     for(int i=0; a[i]!=SENTINEL; i++) {
-        printf(" %d ", a[i]);
+        printf(" %d", a[i]);
     }
-    puts("]");
+    puts(" ]");
 }
 
 int getIntArraySize(intArray a) {
@@ -73,57 +73,37 @@ int getIntArray(intArray a) {
     fgets(input, CAPACITY, stdin);
 
     int strLength = strlen(input)-1;
-    printf("%d\n", strLength);
+    printf("Input length is: %d\n", strLength);
 
-    char *tokenPtr = strtok(input, ",");
-    for(int i=0;tokenPtr != NULL; i++)
-    {   
-        if (input[i] < 0) return false;
-        printf("%s ", tokenPtr);
-        tokenPtr = strtok(NULL, ",");
-        // a[i] = tokenPtr;
+    // int covertToIntArray(int strLength, char input, intArray a);
+
+    char *numPtr;
+    int pointingIndex = 0;
+
+    for (int i = 0; input[pointingIndex+1] != '\0';) {
+
+        int number = strtol(input+pointingIndex, &numPtr, 10);
+        if (number != 0) {
+            pointingIndex = numPtr - input;
+            a[i] = number;
+            i++;
+            strLength = i;
+        }
+        else {
+            int nextNumber = strtol(input+pointingIndex+1, &numPtr, 10);
+            if (nextNumber == 0 || input[0] == ',') {
+                puts("[]");
+                return false;
+            }
+            pointingIndex++;
+        }
     }
-
-    if (!isdigit(input[0])) {
-        puts("[]");
-        return false;
-    }
-    if (!isdigit(input[strLength -1])) {
-        puts("[]");
-        return false;
-    }
-    // Fråga
-    // char arr[CAPACITY];
-    // for (int i = 0; i < strLength; i++) {
-    //     if (!isspace(input[i])) {
-    //         arr[i] = input[i];
-    //     }
-    // // }
-    // for (int i = 0; i < strLength; i++) {
-
-    //     if (!isdigit(input[i]) && i <= strLength) {
-    //         // if (isblank(input[i+1])){
-    //         //     i++;
-    //         // }
-    //         if (!isdigit(input[i+1])) {
-    //             puts("[]");
-    //             return false;
-    //         }
-
-    //         // else if (isdigit(input[i+1])) {
-    //         //     puts("[]");
-    //         //     return false;
-    //         // }
-    //     }
-        // else { 
-        //     a[i] = input[i];        
-        // }
-    // }
+    // --------------
     a[strLength] = SENTINEL;
-    // Fråga
     printArray(a);
     return true; 
 }
+
 void appendIntArray(intArray a, intArray b, intArray c) {
     int h;
     for (int i = 0, j = 0; a[i] != SENTINEL || b[j] != SENTINEL;) {
