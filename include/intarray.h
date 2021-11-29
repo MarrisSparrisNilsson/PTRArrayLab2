@@ -7,7 +7,7 @@
 
 enum SortOrder {ASCENDING, DESCENDING};
 enum Uniqueness {UNIQUE, NONUNIQUE};
-static enum SortOrder sortOrder;
+static enum SortOrder sortOrder = ASCENDING;
 static enum Uniqueness uniqueness;
 
 typedef int intArray[CAPACITY];
@@ -21,8 +21,7 @@ void sortIntArray(intArray a);
 void setSortOrder(void);
 void setUniqueness(void);
 void filterUnique(intArray a);
-// void removeDuplicate(int *element1Ptr, int *element2Ptr);
-void bubbleSort(intArray a, const size_t size);
+void bubbleSort(intArray a);
 void swap(int *element1Ptr, int *element2Ptr);
 
 /* 

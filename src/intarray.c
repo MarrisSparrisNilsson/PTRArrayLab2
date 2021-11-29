@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "intarray.h"
-
-// int intArray() {
-//     printf("intArray");
-
-
-// }
 
 void printArray(intArray a) {
     printf("[");
@@ -100,14 +97,7 @@ void interleaveIntArray(intArray a, intArray b, intArray c) {
 void sortIntArray(intArray a) {
     setUniqueness();
     setSortOrder();
-    if (sortOrder == ASCENDING) {
-        bubbleSort(a, CAPACITY);
-        puts("\nData items in ascending order: ");
-    }
-    else { // pass function descending
-        bubbleSort(a, CAPACITY);
-        puts("\nData items in descending order: ");
-    }
+    bubbleSort(a);
     if (uniqueness == UNIQUE) {
         filterUnique(a);
         puts("\nUnique numbers:");
@@ -116,10 +106,6 @@ void sortIntArray(intArray a) {
 }
 
 void setSortOrder() {
-    // static variables, värdena ska komma från 2 olika enumtypes
-    // Fråga static varable?
-    // sort ascending och descending
-
     printf("Enter 0 to sort in ascending order,\n"
     "Enter 1 to sort in descending order: ");
     int order; // 0 for ascending order or 1 for descending order
@@ -139,57 +125,35 @@ void setUniqueness() {
 
 void filterUnique(intArray a) {
     printArray(a);
-    intArray buffer = {0}; 
-    memcpy(buffer, a,CAPACITY);
-    // loop to control passes
-
         // loop to control comparisons during each pass
-        for (size_t j = 0; buffer[j+1] != SENTINEL; ++j) {
-
-            // swap adjacent elements if they’re out of order
+        for (size_t j = 0; a[j+1] != SENTINEL; ++j) {
             if (a[j] == a[j + 1]) {
-                buffer[j] = buffer[j+1];
-                // removeDuplicate(&a[j], &a[j + 1]);
-            }
+                for (int i = j; a[i] !=SENTINEL; ++i) {
+                    a[i] = a[i+1];
+                }
+                j = 0;    
+            } 
         }   
-    memcpy(a, buffer,CAPACITY);
-} 
+}
 
-// void removeDuplicate(int *element1Ptr, int *element2Ptr, intArray a) {
-//     intArray buffer = a;
-//     for (size_t i = 0; buffer[i] != SENTINEL; i++)
-//     {
-//         buffer[i] = buffer[i+1];
-//     }
-//     a = buffer;    
-// }
-
-void bubbleSort(intArray a, const size_t size) {
-
-    // loop to control passes
-    // for (unsigned int pass = 0; pass < size - 1; ++pass) {
+void bubbleSort(intArray a) {
+    for (unsigned int pass = 0; a[pass + 1] != SENTINEL; ++pass) {
 
         // loop to control comparisons during each pass
-            printArray(a);
-        for (size_t j = 0; j < size - 1; ++j) {
+        for (size_t j = 0; a[j + 1] != SENTINEL; ++j) {
 
-            if (sortOrder == ASCENDING)
-            {
+            if (sortOrder == ASCENDING) {
                 if (a[j] > a[j + 1]) {
                     swap(&a[j], &a[j + 1]);
                 }
             }
-            else {
+            if (sortOrder == DESCENDING) {
                 if (a[j] < a[j + 1]) {
                     swap(&a[j], &a[j + 1]);
                 }
             }
-            // swap adjacent elements if they’re out of order
-            // else swap(&a[j+1], &a[j]);
         }   
-            printArray(a);
-
-    // }
+    }
 } 
 
 void swap(int *element1Ptr, int *element2Ptr) {
