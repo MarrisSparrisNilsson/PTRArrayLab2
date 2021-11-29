@@ -4,6 +4,7 @@
 // #include <ctype.h>
 // #include <string.h>
 #include "intarray.h"
+#include "fmatrix.h"
 /*
 // Fråga 
 */
@@ -25,5 +26,8 @@ int main() {
     appendIntArray(a,b,c);
     interleaveIntArray(a,b,c);
     sortIntArray(a);
+    // createMatrix(float);
+    // destroyMatrix(m);
+    // printMatrix(m);
     return 0;
 }
