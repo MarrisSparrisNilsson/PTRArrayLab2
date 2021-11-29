@@ -4,7 +4,7 @@
 
 /* 
 
-fMatrix code
+fMatrix function prototypes
 
 */
 
