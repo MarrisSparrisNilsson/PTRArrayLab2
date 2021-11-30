@@ -7,9 +7,10 @@
 
 typedef float fMatrix[ROWS][COLS];
 
-float* creatematrix(float f);
-void destroyMatrix(m);
-void printMatrix(m);
+fMatrix* createMatrix(float f);
+void destroyMatrix(fMatrix* m);
+void printMatrix(fMatrix* m);
+
 /* 
 
 fMatrix function prototypes

@@ -26,8 +26,8 @@ int main() {
     appendIntArray(a,b,c);
     interleaveIntArray(a,b,c);
     sortIntArray(a);
-    // createMatrix(float);
-    // destroyMatrix(m);
-    // printMatrix(m);
+    fMatrix *m = createMatrix(0.00);
+    printMatrix(m);
+    destroyMatrix(m);
     return 0;
 }
