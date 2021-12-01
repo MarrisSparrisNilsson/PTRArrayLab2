@@ -13,9 +13,8 @@ void destroyMatrix(fMatrix* m);
 void printMatrix(fMatrix* m);
 bool getMatrix(fMatrix* m);
 void matAdd(fMatrix* m1, fMatrix* m2);
-// void matMul(fMatrix* m1, fMatrix* m2);
-void matMul(float m1[3][3], float m2[3][3]);
-// void matAdd(float m1[][3], float m2[][3]);
+void matMul(fMatrix* m1, fMatrix* m2);
+// void matMul(float m1[3][3], float m2[3][3]);
 
 /* 
 

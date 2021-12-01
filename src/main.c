@@ -12,17 +12,14 @@ void displayMainMenu();
 
 int main() {
     intArray a = {0}, b = {0}, c = {0};
+    fMatrix *m1 = createMatrix(0.00), *m2 = createMatrix(0.00);
     
-    // fMatrix *m = createMatrix(0.00);
-    // destroyMatrix(m);
-    // printMatrix(m);
-    // fMatrix *m1 = createMatrix(0.00), *m2 = createMatrix(0.00);
     int inputValue = 0;
    
     displayMainMenu(); // Displays the different options you have.
    while (inputValue != 7) {
 
-      printf("Select an option: ");
+      printf("\nSelect an option: ");
       scanf("%d", &inputValue);
 
       switch (inputValue) {
@@ -68,29 +65,47 @@ int main() {
             break;
 
         case 4:
-            fMatrix *m1 = createMatrix(0.00), *m2 = createMatrix(0.00);
-            getMatrix(m1);
-            printMatrix(m1);
-            getMatrix(m2);
-            printMatrix(m2);
-            matAdd(m1,m2);
-            printf("Result:\n");
-            printMatrix(m1);
+            for (int i = 0; i < 2 ; ) {
+                printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
+                if(getMatrix(i == 0 ? m1 : m2)) {
+                    i++;
+                    if (i == 2) {
+                        matAdd(m1,m2);
+                        printf("\nResult: ");
+                        printMatrix(m1);
+                    }
+                }
+                else puts("Oops! You entered a invalid list, please try again. ");
+            }
             destroyMatrix(m1); destroyMatrix(m2);
             break;
 
         case 5:
-            // fMatrix *m1 = createMatrix(0.00), *m2 = createMatrix(0.00);
-            // printf("Please enter first comma-separated list of 9 floats: ");
-            // getMatrix(m1);
-            // printMatrix(m1);
-            // printf("Please enter second comma-separated list of 9 floats: ");
-            // getMatrix(m2);
-            // printMatrix(m2);
-            // // matMul(m1,m2);
-            // printf("Result:\n");
-            // printMatrix(m1);
-            // destroyMatrix(m1); destroyMatrix(m2);
+            // float m1[3][3] = {
+            //     {1.00, 3.00, 5.40},
+            //     {1.70, 9.10, 8.20},
+            //     {6.30, 4.70, 52.00}
+            // };
+
+            // float m2[3][3] = {
+            //     {1.00, 3.90, 5.00},
+            //     {8.10, 2.50, 9.80},
+            //     {6.00, 3.70, 1.10}
+            // };
+            // matMul(m1,m2);
+            for (int i = 0; i < 2 ; ) {
+                printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
+                if(getMatrix(i == 0 ? m1 : m2)) {
+                    i++;
+                    if (i == 2) {
+                        matMul(m1,m2);
+                        printf("\nResult: ");
+                        printMatrix(m1);
+                    }
+                }
+                else puts("Oops! You entered a invalid list, please try again. ");
+            }
+            destroyMatrix(m1); destroyMatrix(m2);
             break;
 
         case 6:
@@ -105,45 +120,6 @@ int main() {
             break;   
       }
     }
-    // intArray a = {1,1,2,2,3,3,4,5,6,7,8,9,10,11,12,13,14,15,16,SENTINEL};
-    // intArray a = {2,6,8,4,5,SENTINEL};
-    // intArray b = {3,4,6,7,9,SENTINEL};
-    // intArray c;
-    // intArray arr = {0};
-
-    // printArray(a); 
-    // appendIntArray(a,b,c);
-    // interleaveIntArray(a,b,c);
-    // sortIntArray(a);
-    // fMatrix *m = createMatrix(0.00);
-    // printMatrix(m);
-    // destroyMatrix(m);
-    // getMatrix(m);
-    // printMatrix(m);
-    // destroyMatrix(m);
-    
-
-    // fMatrix m1 = {
-    //     {1.0, 3.0, 5.4},
-    //     {1.7, 9.1, 8.2},
-    //     {6.3, 4.7, 52.0}
-    // };
-
-    // fMatrix m2 = {
-    //     {1.0, 3.9, 5.0},
-    //     {8.1, 2.5, 9.8},
-    //     {6.0, 3.7, 1.1}
-    // };
-
-    // fMatrix *m1 = createMatrix(0.00);
-    // fMatrix *m2 = createMatrix(0.00);
-
-
-    // matAdd(m, m1);
-
-    // printMatrix(matAdd(m1, m2));
-    // printMatrix(m1);
-
     return 0;
 }
 
