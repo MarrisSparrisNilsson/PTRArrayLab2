@@ -5,9 +5,7 @@
 // #include <string.h>
 #include "intarray.h"
 #include "fmatrix.h"
-/*
-// Fråga 
-*/
+
 void displayMainMenu();
 
 int main() {
@@ -17,108 +15,112 @@ int main() {
     int inputValue = 0;
    
     displayMainMenu(); // Displays the different options you have.
-   while (inputValue != 7) {
+    while (inputValue != 7) {
+        printf("Select an option (1-7): ");
+        scanf("%d", &inputValue);
 
-      printf("\nSelect an option: ");
-      scanf("%d", &inputValue);
-
-      switch (inputValue) {
-         
-        case 1:
-            for (int i = 0; i < 2 ; ) {
-                printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
-                if(getIntArray(i == 0 ? a : b)) {
-                    i++;
-                    if (i == 2) {
-                        appendIntArray(a,b,c);
-                        printArray(c);
+        switch (inputValue) {
+            
+            case 1:
+                puts("\n=== Append two integer arrays ===");
+                for (int i = 0; i < 2 ; ) {
+                    printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
+                    if(getIntArray(i == 0 ? a : b)) {
+                        i++;
+                        if (i == 2) {
+                            appendIntArray(a,b,c);
+                            printArray(c);
+                        }
                     }
+                    else puts("Oops! You entered a invalid list, please try again. ");
                 }
-                else puts("Oops! You entered a invalid list, please try again. ");
-            }
-            break;
+                break;
 
-        case 2:
-           for (int i = 0; i < 2 ; ) {
-                printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
-                if(getIntArray(i == 0 ? a : b)) {
-                    i++;
-                    if (i == 2) {
-                        interleaveIntArray(a,b,c);
-                        printArray(c);
+            case 2:
+                puts("\n=== Interleave two integer arrays ===");
+                for (int i = 0; i < 2 ; ) {
+                    printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
+                    if(getIntArray(i == 0 ? a : b)) {
+                        i++;
+                        if (i == 2) {
+                            interleaveIntArray(a,b,c);
+                            printArray(c);
+                        }
                     }
+                    else puts("Oops! You entered a invalid list, please try again. ");
                 }
-                else puts("Oops! You entered a invalid list, please try again. ");
-            }
-            break;
-         
-        case 3:
-            for (size_t i = 0; i < 1;) {
-                printf("Please enter a comma-separated list of positive integers: ");
-                if (getIntArray(a)) {
-                    sortIntArray(a);
-                    printArray(a);
-                    i++;
-                }
-                else printf("Oops! You entered a invalid list, please try again. ");
-            }
-            break;
-
-        case 4:
-            for (int i = 0; i < 2 ; ) {
-                printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
-                if(getMatrix(i == 0 ? m1 : m2)) {
-                    i++;
-                    if (i == 2) {
-                        matAdd(m1,m2);
-                        printf("\nResult: ");
-                        printMatrix(m1);
+                break;
+                
+            case 3:
+                puts("\n=== Sort an integer array ===");
+                for (size_t i = 0; i < 1;) {
+                    printf("Please enter a comma-separated list of positive integers: ");
+                    if (getIntArray(a)) {
+                        sortIntArray(a);
+                        printArray(a);
+                        i++;
                     }
+                    else printf("Oops! You entered a invalid list, please try again. ");
                 }
-                else puts("Oops! You entered a invalid list, please try again. ");
-            }
-            destroyMatrix(m1); destroyMatrix(m2);
-            break;
+                break;
 
-        case 5:
-            // float m1[3][3] = {
-            //     {1.00, 3.00, 5.40},
-            //     {1.70, 9.10, 8.20},
-            //     {6.30, 4.70, 52.00}
-            // };
-
-            // float m2[3][3] = {
-            //     {1.00, 3.90, 5.00},
-            //     {8.10, 2.50, 9.80},
-            //     {6.00, 3.70, 1.10}
-            // };
-            // matMul(m1,m2);
-            for (int i = 0; i < 2 ; ) {
-                printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
-                if(getMatrix(i == 0 ? m1 : m2)) {
-                    i++;
-                    if (i == 2) {
-                        matMul(m1,m2);
-                        printf("\nResult: ");
-                        printMatrix(m1);
+            case 4:
+                puts("\n=== Add two 3x3 float matrices ===");
+                for (int i = 0; i < 2 ; ) {
+                    printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
+                    if(getMatrix(i == 0 ? m1 : m2)) {
+                        i++;
+                        if (i == 2) {
+                            matAdd(m1,m2);
+                            printf("\nResult: ");
+                            printMatrix(m1);
+                        }
                     }
+                    else puts("Oops! You entered a invalid list, please try again. ");
                 }
-                else puts("Oops! You entered a invalid list, please try again. ");
-            }
-            destroyMatrix(m1); destroyMatrix(m2);
-            break;
+                destroyMatrix(m1); destroyMatrix(m2);
+                break;
 
-        case 6:
-            displayMainMenu();
-            break;
+            case 5:
+                puts("\n=== Multiply two 3x3 float matrices ===");
+                // float m1[3][3] = {
+                //     {1.00, 3.00, 5.40},
+                //     {1.70, 9.10, 8.20},
+                //     {6.30, 4.70, 52.00}
+                // };
 
-        case 7:
-            break;
+                // float m2[3][3] = {
+                //     {1.00, 3.90, 5.00},
+                //     {8.10, 2.50, 9.80},
+                //     {6.00, 3.70, 1.10}
+                // };
+                // matMul(m1,m2);
+                for (int i = 0; i < 2 ; ) {
+                    printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
+                    if(getMatrix(i == 0 ? m1 : m2)) {
+                        i++;
+                        if (i == 2) {
+                            matMul(m1,m2);
+                            printf("\nResult: ");
+                            printMatrix(m1);
+                        }
+                    }
+                    else puts("Oops! You entered a invalid list, please try again. ");
+                }
+                destroyMatrix(m1); destroyMatrix(m2);
+                break;
 
-         default:
-            puts("Please enter a valid option!\n");
-            break;   
-      }
+            case 6:
+                displayMainMenu();
+                break;
+
+            case 7:
+                break;
+
+            default:
+                puts("Please enter a valid option!\n");
+                break;   
+        }
     }
     return 0;
 }
