@@ -8,44 +8,61 @@
 fMatrix* createMatrix(float f) {
     fMatrix *mPtr = (fMatrix*) malloc(sizeof(fMatrix));
 
+    float *mp = (float *)mPtr;
     if (mPtr == NULL) return NULL;
 
-    for (int r = 0; r < ROWS; ++r) {
-        for (int c = 0; c < COLS; ++c) {
-            *mPtr[r][c] = f;
+    for (size_t row = 0; row < ROWS; ++row) {
+        for (size_t col = 0; col < COLS; ++col) {
+                *(mp+row*COLS+col) = f;
+                // printf("%17s%d%s%d %p %s%d%s %-3d\n","mp+", row, "*COLS+", col, mp+row*COLS+col, "*(mp+", row,"*COLS+", col,":", *(mp+row*COLS+col));
         }
     }    
     return mPtr;
 }
-
+// void destroyMatrix(fMatrix* m) {
+    
+//     if (m != NULL) {
+//         for (size_t row = 0; row < ROWS; ++row) {
+//                 free(m[row]);
+//         }
+//         free(m);
+//         m = NULL;
+//     }
+// }
 void destroyMatrix(fMatrix* m) {
-    if (m != NULL) {
+        if(m != NULL) {
         free(m);
-        m = NULL;
+    
     }
+    m = NULL;
 }
 
 void printMatrix(fMatrix* m) {
-    for(size_t r=0; r<ROWS; ++r) {
+    float *mp = (float *)m;
+
+    for(size_t row=0; row<ROWS; ++row) {
         printf("\n");
-        for(size_t c=0; c<COLS; ++c) {
-            printf("%.2f ", *m[r][c]);
+        for(size_t col=0; col<COLS; ++col) {
+            // printf("%.2f ", *m[row][col]);
+            printf("%.2f ", *(mp+row*COLS+col));
+
         }
     }
     printf("\n");
 }
 
 bool getMatrix(fMatrix* m) {
-    char input[19];
     char *endPtr;
-    
+    char input[SIZE];
+    float *mp = (float *)m;
+
     printf("Please enter a comma-separated list of 9 floats: ");
     fflush(stdin);
-    fgets(input, 20, stdin);
+    fgets(input, SIZE, stdin);
 
     if (
         input[0] == ',' 
-        || *(strrchr(input, '\n')-1) == ',' 
+        || *(strchr(input, '\n')-1) == ',' 
         || input[0] == ' '
     ) return false;
 
@@ -58,7 +75,8 @@ bool getMatrix(fMatrix* m) {
         if (init != 0) {
             while (row < ROWS) {
                 while (col < COLS) {
-                    *m[row][col] = init;
+                    *(mp+row*COLS+col) = init;
+                    // *m[row][col] = init;
                     col++;
                     if (col == 3) {
                         row++;
@@ -70,7 +88,6 @@ bool getMatrix(fMatrix* m) {
             }
         }
     }
-    printMatrix(m);
     return true;
 }
 
@@ -88,23 +105,54 @@ bool getMatrix(fMatrix* m) {
 
 void matAdd(fMatrix* m1, fMatrix* m2) {
 // void matAdd(float m1[][3], float m2[][3]) {
+    float *mp1 = (float *)m1;
+    float *mp2 = (float *)m2;
+    // fMatrix* sum;
+    for (size_t row = 0; row < ROWS; ++row) {
+        for (size_t col = 0; col < COLS; ++col) {
+            *(mp1+row*COLS+col) = (*(mp1+row*COLS+col) + *(mp2+row*COLS+col));
+            // *m1[row][col] = *m1[row][col] + *m2[row][col];
 
-    for (int r = 0; r < ROWS; ++r) {
-        for (int c = 0; c < COLS; ++c) {
-            // m1[r][c] = m1[r][c] + m2[r][c];
-            *m1[r][c] = *m1[r][c] + *m2[r][c];
+            // m1[row][col] = m1[row][col] + m2[row][col];
+            // printf("\n%.2f ", *(mp1+2*COLS+2));
+            // printf("\n%.2f ", *(mp2+2*COLS+2));
         }
     }
-
-    // for(size_t r=0; r<ROWS; ++r) {
+    // m1[row][col] = sum;
+    // for(size_t row=0; row<ROWS; ++row) {
     //     printf("\n");
-    //     for(size_t c=0; c<COLS; ++c) {
-    //         printf("%7.2f", m1[r][c]);
+    //     for(size_t col=0; col<COLS; ++col) {
+    //         printf("%7.2f", m1[row][col]);
     //     }
     // }
     // printf("\n");
 
 
-    // memcpy(buffer, *m1, 100);
-    // return m1;
+//     // memcpy(buffer, *m1, SIZE);
+//     // return m1;
 }
+// void matMul(float m1[3][3], float m2[3][3]) {
+//     float sum = 0;
+//     float i, row, col;
+// // void matMul(fMatrix* m1, fMatrix* m2) {
+//     for (size_t i = 0; i < ROWS; i++)
+//     {
+//         for (size_t col = 0; col < COLS; ++col) {
+//             for (size_t row = 0; row < ROWS; ++row) {
+//                 // m1[row][col] = m1[row][col] + m2[row][col];
+//                 sum = sum + m1[i][row]*m2[row][col];
+
+//             }
+//         }
+//     }
+//     m1[i][col] = sum;
+    
+//      for(size_t row=0; row<ROWS; ++row) {
+//         printf("\n");
+//         for(size_t col=0; col<COLS; ++col) {
+//             printf("%7.2f", m1[row][col]);
+//         }
+//     }
+//     printf("\n");
+
+// }
