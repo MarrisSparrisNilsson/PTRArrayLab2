@@ -78,23 +78,12 @@ int main() {
                     }
                     else puts("Oops! You entered a invalid list, please try again. ");
                 }
-                destroyMatrix(m1); destroyMatrix(m2);
+                destroyMatrix(m1); 
+                destroyMatrix(m2);
                 break;
 
             case 5:
                 puts("\n=== Multiply two 3x3 float matrices ===");
-                // float m1[3][3] = {
-                //     {1.00, 3.00, 5.40},
-                //     {1.70, 9.10, 8.20},
-                //     {6.30, 4.70, 52.00}
-                // };
-
-                // float m2[3][3] = {
-                //     {1.00, 3.90, 5.00},
-                //     {8.10, 2.50, 9.80},
-                //     {6.00, 3.70, 1.10}
-                // };
-                // matMul(m1,m2);
                 for (int i = 0; i < 2 ; ) {
                     printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
                     if(getMatrix(i == 0 ? m1 : m2)) {
@@ -107,7 +96,8 @@ int main() {
                     }
                     else puts("Oops! You entered a invalid list, please try again. ");
                 }
-                destroyMatrix(m1); destroyMatrix(m2);
+                destroyMatrix(m1); 
+                destroyMatrix(m2);
                 break;
 
             case 6:
