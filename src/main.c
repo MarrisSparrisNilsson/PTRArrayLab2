@@ -32,7 +32,7 @@ int main() {
                             printArray(c);
                         }
                     }
-                    else puts("Oops! You entered a invalid list, please try again. ");
+                    else puts("Oops! You entered an invalid list, please try again. ");
                 }
                 break;
 
@@ -47,7 +47,7 @@ int main() {
                             printArray(c);
                         }
                     }
-                    else puts("Oops! You entered a invalid list, please try again. ");
+                    else puts("Oops! You entered an invalid list, please try again. ");
                 }
                 break;
                 
@@ -60,7 +60,7 @@ int main() {
                         printArray(a);
                         i++;
                     }
-                    else printf("Oops! You entered a invalid list, please try again. ");
+                    else printf("Oops! You entered an invalid list, please try again. ");
                 }
                 break;
 
@@ -72,11 +72,10 @@ int main() {
                         i++;
                         if (i == 2) {
                             matAdd(m1,m2);
-                            printf("\nResult: ");
                             printMatrix(m1);
                         }
                     }
-                    else puts("Oops! You entered a invalid list, please try again. ");
+                    else puts("Oops! You entered an invalid list, please try again. ");
                 }
                 destroyMatrix(m1); 
                 destroyMatrix(m2);
@@ -90,11 +89,10 @@ int main() {
                         i++;
                         if (i == 2) {
                             matMul(m1,m2);
-                            printf("\nResult: ");
                             printMatrix(m1);
                         }
                     }
-                    else puts("Oops! You entered a invalid list, please try again. ");
+                    else puts("Oops! You entered an invalid list, please try again. ");
                 }
                 destroyMatrix(m1); 
                 destroyMatrix(m2);

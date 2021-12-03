@@ -40,55 +40,61 @@ void destroyMatrix(fMatrix* m) {
 void printMatrix(fMatrix* m) {
     float *mp = (float *)m;
 
+    puts("\nResult:");
+    printf("=============================");
     for(size_t row=0; row<ROWS; ++row) {
         printf("\n");
         for(size_t col=0; col<COLS; ++col) {
             // printf("%.2f ", *m[row][col]);
-            printf("%.2f ", *(mp+row*COLS+col));
+            printf("%9.2f", *(mp+row*COLS+col));
         }
     }
-    printf("\n");
+    puts("\n=============================");
 }
 
 bool getMatrix(fMatrix* m) {
     char *endPtr;
     char input[SIZE];
-    float *mp = (float *)m;
+    float *mp = (float *)m; // Declares a new pointer that points to the m matrix.
 
-    fflush(stdin);
-    fgets(input, SIZE, stdin);
+    scanf("%s", &input);
 
-    if (
-        input[0] == ',' 
-        || *(strchr(input, '\n')-1) == ',' 
-        || input[0] == ' '
-    ) return false;
-    for (size_t j = 0, i = 0, row = 0, col = 0; input[i] != '\n'; i++, j++) {
-        
-        int count = 0;
-        if (input[i] == ',' && input[i+1]== ',') {
-            return false;
+    // If first or last character is (,)
+    if (input[0] == ',' || (input[strlen(input) - 1]) == ',') return false;
+
+    char *tokenPtr = strtok(input, ",");
+
+    char *lastDigitPtr = NULL; // Pointer that points to the last position of the each token string
+    int memdiff;
+
+    int row = 0;
+    int col = 0;
+
+    while(tokenPtr != NULL) {
+        int lastDigitIndex = strlen(tokenPtr) - 1; // Gets the index of the last digit in the string token
+
+        // Loops to check if the token string contains any other character that isn't used for float values.
+        for (size_t i = 0; i < strlen(tokenPtr); i++) {
+            if (!isdigit(*(tokenPtr+i)) && *(tokenPtr+i) != '.') 
+                return false;
         }
-        for (; input [j] != ',' && input [j] != '\n'; j++) {
-            if (isdigit(input[j]) && isdigit(input[j+1])) count++;
+
+        if (lastDigitPtr != NULL) {
+            memdiff = tokenPtr - lastDigitPtr; // If the position difference (in memory) of the last digit of the previous number and
+            if (memdiff > 2) return false;     // the start of the next number is greater than 2 bytes, that means its not formatted correctly.
         }
-        float init = strtod(input + i, &endPtr);
-        i = i + count; 
-        j = i;
-        if (init != 0) {
-            while (row < ROWS) {
-                while (col < COLS) {
-                    *(mp+row*COLS+col) = init;
-                    col++;
-                    if (col == 3) {
-                        row++;
-                        col = 0;
-                    }
-                    break;
-                }
-                break;
-            }
+
+        if (col == COLS) { // Goes to next row and resets column at the end of each row.
+            col=0;
+            row++;
         }
+
+        float floatValue = strtod(tokenPtr, &endPtr); // Converts string to float value.
+        *(mp+row*COLS+col) = floatValue; // Placing the float value in the correct slot in the matrix.
+        col++;
+
+        lastDigitPtr = *(&tokenPtr) + lastDigitIndex; // Points the pointer to the last position of the token string.
+        tokenPtr = strtok(NULL, ","); // Continues to search the rest of the string. 
     }
     return true;
 }
