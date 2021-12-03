@@ -107,7 +107,7 @@ int main() {
 } // End of the main function.
 
 // Start of function displayManiMenu.
-void displayMainMenu() { //Displays the main menu and promtps the user to select an ooption.
+void displayMainMenu() { // Displays the main menu and promtps the user to select an option.
    puts("\n== Main Menu ==\n"
    "1. Append two integer arrays.\n"
    "2. Interleave two integer arrays.\n"

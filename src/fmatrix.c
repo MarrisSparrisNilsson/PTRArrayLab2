@@ -18,7 +18,7 @@ fMatrix* createMatrix(float f) {
         }
     }
     return mPtr;
-}// End of function createMatrix.
+} // End of function createMatrix.
 
 // Start of function destroyMatrix.
 void destroyMatrix(fMatrix* m) {
@@ -26,7 +26,7 @@ void destroyMatrix(fMatrix* m) {
         free(m); // Deallocates the memory for the fMatrix on the heap.
     }
     m = NULL; // Sets the fMatrix to NULL.
-}// End of function destroyMatrix.
+} // End of function destroyMatrix.
 
 // Start of function printMatrix.
 void printMatrix(fMatrix* m) { // Prints a fMatrix and a result of matAdd and matMul.
@@ -37,22 +37,21 @@ void printMatrix(fMatrix* m) { // Prints a fMatrix and a result of matAdd and ma
     for(size_t row=0; row<ROWS; ++row) {
         printf("\n");
         for(size_t col=0; col<COLS; ++col) {
-            // printf("%.2f ", *m[row][col]);
             printf("%9.2f", *(mp+row*COLS+col));
         }
     }
     puts("\n=============================");
-}// End of function printMatrix.
+} // End of function printMatrix.
 
 // Start of function getMatrix.
-bool getMatrix(fMatrix* m) {//Takes a string with numbers and commas form the user and creates a 2-dimensional array if the string has the correct format.
+bool getMatrix(fMatrix* m) { //Takes a string with numbers and commas form the user and creates a 2-dimensional array if the string has the correct format.
     char *endPtr;
     char input[SIZE];
     float *mp = (float *)m; // Declares a new pointer mp that points to the matrix m.
 
     fflush(stdin);
     fgets(input, SIZE, stdin);
-    input[strlen(input)-1] = '\0'; // Removes \n character that was added by fgets.
+    input[strlen(input)-1] = '\0'; // Removes '\n' character that was added by fgets.
 
     // If first or last character is (,) string is invalid.
     if (input[0] == ',' || (input[strlen(input) - 1]) == ',') return false;
@@ -85,18 +84,18 @@ bool getMatrix(fMatrix* m) {//Takes a string with numbers and commas form the us
         tokenPtr = strtok(NULL, ","); // Continues to search the rest of the string. 
     }
     return true; // Returns true if the string entered has the correct format.
-}// End of function getMatrix.
+} // End of function getMatrix.
 
 // Start of function matAdd.
 void matAdd(fMatrix* m1, fMatrix* m2) { // Adds the values of 2 fMatrixes and then puts the value in the first fMatrix.
     float *mp1 = (float *)m1;
     float *mp2 = (float *)m2;
     for (size_t row = 0; row < ROWS; ++row) { 
-        for (size_t col = 0; col < COLS; ++col) {// Puts the value after an addition was made into correct slot of the first fMatrix.
+        for (size_t col = 0; col < COLS; ++col) { // Puts the value after an addition was made into correct slot of the first fMatrix.
             *(mp1+row*COLS+col) = (*(mp1+row*COLS+col) + *(mp2+row*COLS+col));
         }
     }
-}// End of function matAdd.
+} // End of function matAdd.
 
 // Start of function matMul.
 void matMul(fMatrix* m1, fMatrix* m2) { // Preforms matrix multiplication.
@@ -108,7 +107,7 @@ void matMul(fMatrix* m1, fMatrix* m2) { // Preforms matrix multiplication.
     float sum = 0;
     for (size_t i = 0; i < ROWS; ++i) {
         for (size_t j = 0; j < COLS; ++j) {
-            for (size_t k = 0; k < ROWS; ++k) {// Preforms matrix multiplication and allocates the value to the sum variable.
+            for (size_t k = 0; k < ROWS; ++k) { // Preforms matrix multiplication and allocates the value to the sum variable.
                 sum = sum + *(mPtr1+i*COLS+k) * *(mPtr2+k*COLS+j);
             }
             *(mPtr3+i*COLS+j) = sum; // Puts the value from sum into the correct slot in our buffert fMatrix.
@@ -121,4 +120,4 @@ void matMul(fMatrix* m1, fMatrix* m2) { // Preforms matrix multiplication.
         }
     }
     destroyMatrix(m3);
-}// End of function matMul.
+} // End of function matMul.
