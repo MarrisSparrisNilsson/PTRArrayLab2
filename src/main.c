@@ -1,14 +1,12 @@
-#include <stdio.h> // Fråga
+#include <stdio.h>
 #include <stdbool.h>
-// #include <stdlib.h>
-// #include <ctype.h>
-// #include <string.h>
 #include "intarray.h"
 #include "fmatrix.h"
 
 void displayMainMenu();
 
-int main() {
+// Start of the main function.
+int main() { 
     intArray a = {0}, b = {0}, c = {0};
     fMatrix *m1, *m2;
 
@@ -23,7 +21,7 @@ int main() {
             
             case 1:
                 puts("\n=== Append two integer arrays ===");
-                for (size_t i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) { // Loops until the user inserts the correct format.
                     printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
                     if(getIntArray(i == 0 ? a : b)) {
                         i++;
@@ -36,7 +34,7 @@ int main() {
 
             case 2:
                 puts("\n=== Interleave two integer arrays ===");
-                for (size_t i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) { // Loops until the user inserts the correct format.
                     printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
                     if(getIntArray(i == 0 ? a : b)) {
                         i++;
@@ -49,7 +47,7 @@ int main() {
                 
             case 3:
                 puts("\n=== Sort an integer array ===");
-                for (size_t i = 0; i < 1;) {
+                for (size_t i = 0; i < 1;) { // Loops until the user inserts the correct format.
                     printf("Please enter a comma-separated list of positive integers: ");
                     if (getIntArray(a)) {
                         sortIntArray(a);
@@ -62,7 +60,7 @@ int main() {
                 m1 = createMatrix(0.00);
                 m2 = createMatrix(0.00);
                 puts("\n=== Add two 3x3 float matrices ===");
-                for (size_t i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) { // Loops until the user inserts the correct format.
                     printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
                     if(getMatrix(i == 0 ? m1 : m2)) {
                         i++;
@@ -80,7 +78,7 @@ int main() {
                 m1 = createMatrix(0.00);
                 m2 = createMatrix(0.00);
                 puts("\n=== Multiply two 3x3 float matrices ===");
-                for (size_t i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) { // Loops until the user inserts the correct format.
                     printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
                     if(getMatrix(i == 0 ? m1 : m2)) {
                         i++;
@@ -106,10 +104,10 @@ int main() {
         }
     }
     return 0;
-} // end of main
+} // End of the main function.
 
-// Displays the main menu and prompts the user to pick an option.
-void displayMainMenu() {
+// Start of function displayManiMenu.
+void displayMainMenu() { //Displays the main menu and promtps the user to select an ooption.
    puts("\n== Main Menu ==\n"
    "1. Append two integer arrays.\n"
    "2. Interleave two integer arrays.\n"
@@ -118,4 +116,4 @@ void displayMainMenu() {
    "5. Multiply two 3x3 float matrices.\n"      
    "6. Print Main Menu.\n"      
    "7. Quit\n");      
-} // end of displayMainMenu
+} // End of displayMainMenu
