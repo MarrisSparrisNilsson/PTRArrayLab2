@@ -24,10 +24,4 @@ void filterUnique(intArray a);
 void bubbleSort(intArray a);
 void swap(int *element1Ptr, int *element2Ptr);
 
-/* 
-
-intArray function prototypes
-
-*/
-
 #endif /*_intarray_h */

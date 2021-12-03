@@ -10,8 +10,8 @@ void displayMainMenu();
 
 int main() {
     intArray a = {0}, b = {0}, c = {0};
-    fMatrix *m1 = createMatrix(0.00), *m2 = createMatrix(0.00);
-    
+    fMatrix *m1, *m2;
+
     int inputValue = 0;
    
     displayMainMenu(); // Displays the different options you have.
@@ -23,7 +23,7 @@ int main() {
             
             case 1:
                 puts("\n=== Append two integer arrays ===");
-                for (int i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) {
                     printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
                     if(getIntArray(i == 0 ? a : b)) {
                         i++;
@@ -31,14 +31,12 @@ int main() {
                             appendIntArray(a,b,c);
                             printArray(c);
                         }
-                    }
-                    else puts("Oops! You entered an invalid list, please try again. ");
-                }
-                break;
+                    } else puts("Oops! You entered an invalid list, please try again.");
+                } break;
 
             case 2:
                 puts("\n=== Interleave two integer arrays ===");
-                for (int i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) {
                     printf("Please enter %s comma-separated list of positive integers: ", (i == 0 ? "first": "second"));
                     if(getIntArray(i == 0 ? a : b)) {
                         i++;
@@ -46,10 +44,8 @@ int main() {
                             interleaveIntArray(a,b,c);
                             printArray(c);
                         }
-                    }
-                    else puts("Oops! You entered an invalid list, please try again. ");
-                }
-                break;
+                    } else puts("Oops! You entered an invalid list, please try again.");
+                } break;
                 
             case 3:
                 puts("\n=== Sort an integer array ===");
@@ -59,14 +55,14 @@ int main() {
                         sortIntArray(a);
                         printArray(a);
                         i++;
-                    }
-                    else printf("Oops! You entered an invalid list, please try again. ");
-                }
-                break;
+                    } else printf("Oops! You entered an invalid list, please try again.");
+                } break;
 
             case 4:
+                m1 = createMatrix(0.00);
+                m2 = createMatrix(0.00);
                 puts("\n=== Add two 3x3 float matrices ===");
-                for (int i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) {
                     printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
                     if(getMatrix(i == 0 ? m1 : m2)) {
                         i++;
@@ -74,16 +70,17 @@ int main() {
                             matAdd(m1,m2);
                             printMatrix(m1);
                         }
-                    }
-                    else puts("Oops! You entered an invalid list, please try again. ");
+                    } else puts("Oops! You entered an invalid list, please try again.");
                 }
                 destroyMatrix(m1); 
                 destroyMatrix(m2);
                 break;
 
             case 5:
+                m1 = createMatrix(0.00);
+                m2 = createMatrix(0.00);
                 puts("\n=== Multiply two 3x3 float matrices ===");
-                for (int i = 0; i < 2 ; ) {
+                for (size_t i = 0; i < 2 ; ) {
                     printf("Please enter %s comma-separated list of 9 floats: ", (i == 0 ? "first": "second"));
                     if(getMatrix(i == 0 ? m1 : m2)) {
                         i++;
@@ -91,10 +88,9 @@ int main() {
                             matMul(m1,m2);
                             printMatrix(m1);
                         }
-                    }
-                    else puts("Oops! You entered an invalid list, please try again. ");
+                    } else puts("Oops! You entered an invalid list, please try again.");
                 }
-                destroyMatrix(m1); 
+                destroyMatrix(m1);
                 destroyMatrix(m2);
                 break;
 
@@ -102,8 +98,7 @@ int main() {
                 displayMainMenu();
                 break;
 
-            case 7:
-                break;
+            case 7: break;
 
             default:
                 puts("Please enter a valid option!\n");
@@ -111,9 +106,9 @@ int main() {
         }
     }
     return 0;
-}
+} // end of main
 
-// Displays the mainmenu and prompts the user to pick a game or to quit.
+// Displays the main menu and prompts the user to pick an option.
 void displayMainMenu() {
    puts("\n== Main Menu ==\n"
    "1. Append two integer arrays.\n"
@@ -123,4 +118,4 @@ void displayMainMenu() {
    "5. Multiply two 3x3 float matrices.\n"      
    "6. Print Main Menu.\n"      
    "7. Quit\n");      
-} // end of mainmenu
+} // end of displayMainMenu
